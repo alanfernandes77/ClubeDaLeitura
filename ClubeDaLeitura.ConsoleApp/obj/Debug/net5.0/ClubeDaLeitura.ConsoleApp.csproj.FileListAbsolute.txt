@@ -1,0 +1,16 @@
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\bin\Debug\net5.0\ClubeDaLeitura.ConsoleApp.exe
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\bin\Debug\net5.0\ClubeDaLeitura.ConsoleApp.deps.json
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\bin\Debug\net5.0\ClubeDaLeitura.ConsoleApp.runtimeconfig.json
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\bin\Debug\net5.0\ClubeDaLeitura.ConsoleApp.runtimeconfig.dev.json
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\bin\Debug\net5.0\ClubeDaLeitura.ConsoleApp.dll
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\bin\Debug\net5.0\ClubeDaLeitura.ConsoleApp.pdb
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.csproj.AssemblyReference.cache
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.AssemblyInfoInputs.cache
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.AssemblyInfo.cs
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.csproj.CoreCompileInputs.cache
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.dll
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\refint\ClubeDaLeitura.ConsoleApp.dll
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.pdb
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ClubeDaLeitura.ConsoleApp.genruntimeconfig.cache
+D:\vs-2022 study\ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp\obj\Debug\net5.0\ref\ClubeDaLeitura.ConsoleApp.dll
