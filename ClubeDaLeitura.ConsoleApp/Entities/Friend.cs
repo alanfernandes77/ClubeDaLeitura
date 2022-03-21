@@ -10,7 +10,9 @@ namespace ClubeDaLeitura.ConsoleApp.Entities
         public string ResponsibleName { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
+        public Penalty Penalty { get; set; }
         public bool HasLoan { get; set; }
+        public bool HasPenalty { get; set; }
 
         public Friend(string name, string responsibleName, string phoneNumber, string address)
         {
@@ -20,6 +22,8 @@ namespace ClubeDaLeitura.ConsoleApp.Entities
             PhoneNumber = phoneNumber;
             Address = address;
             HasLoan = false;
+            HasPenalty = false;
+            Penalty = null;
         }
 
         public override string ToString()
@@ -30,6 +34,12 @@ namespace ClubeDaLeitura.ConsoleApp.Entities
             sb.AppendLine($"Nome do Responsável: {ResponsibleName}");
             sb.AppendLine($"Telefone: {PhoneNumber}");
             sb.AppendLine($"Endereço: {Address}");
+            if (Penalty != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                sb.AppendLine($"Multas: {Penalty.Amount} - Total: R$ {Penalty.Value * Penalty.Amount}");
+                Console.ResetColor();
+            }
             return sb.ToString();
         }
     }

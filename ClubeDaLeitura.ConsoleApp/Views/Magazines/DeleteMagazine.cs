@@ -17,7 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
         public void Show()
         {
             Console.Clear();
-            if (_serviceManager.GetMagazineService().GetMagazines().Count == 0)
+            if (_serviceManager.GetMagazineService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();

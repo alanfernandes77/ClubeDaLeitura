@@ -2,13 +2,13 @@
 using ClubeDaLeitura.ConsoleApp.Services;
 using ClubeDaLeitura.ConsoleApp.Utils;
 
-namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
+namespace ClubeDaLeitura.ConsoleApp.Views.Reservations
 {
-    internal class ListMagazines
+    internal class ListReservations
     {
         private readonly ServiceManager _serviceManager;
-
-        public ListMagazines(ServiceManager serviceManager)
+        
+        public ListReservations(ServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
         }
@@ -16,8 +16,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
         public void Show()
         {
             Console.Clear();
-
-            if (_serviceManager.GetMagazineService().GetList().Count == 0)
+            if (_serviceManager.GetReservationService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();
@@ -25,8 +24,10 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
             }
             else
             {
-                _serviceManager.GetMagazineService().List(true);
-
+                Console.WriteLine();
+                Console.WriteLine($"Registros encontrados: {_serviceManager.GetReservationService().GetList().Count}");
+                Console.WriteLine();
+                _serviceManager.GetReservationService().List();
                 Console.ReadKey();
             }
         }

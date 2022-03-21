@@ -6,6 +6,8 @@
         private readonly BoxService _boxService;
         private readonly MagazineService _magazineService;
         private readonly LoanService _loanService;
+        private readonly ReservationService _reservationService;
+        private readonly CategoryService _categoryService;
 
         public ServiceManager()
         {
@@ -13,6 +15,8 @@
             _boxService = new BoxService();
             _magazineService = new MagazineService();
             _loanService = new LoanService();
+            _reservationService = new ReservationService();
+            _categoryService = new CategoryService();
         }
 
         public FriendService GetFriendService() => _friendService;
@@ -20,5 +24,9 @@
         public MagazineService GetMagazineService() => _magazineService;
 
         public LoanService GetLoanService() => _loanService;
+
+        public ReservationService GetReservationService() => _reservationService;
+
+        public CategoryService GetCategoryService() => _categoryService;
     }
 }

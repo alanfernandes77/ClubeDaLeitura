@@ -17,7 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
         {
             Console.Clear();
 
-            if (_serviceManager.GetFriendService().GetFriends().Count == 0)
+            if (_serviceManager.GetFriendService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();

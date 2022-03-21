@@ -17,7 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
         public void Show()
         {
             Console.Clear();
-            if (_serviceManager.GetFriendService().GetFriends().Count == 0)
+            if (_serviceManager.GetFriendService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();
@@ -41,11 +41,22 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
                 }
                 else
                 {
-                    _serviceManager.GetFriendService().Delete(friend);
+                    if (friend.HasLoan || friend.HasPenalty)
+                    {
+                        Console.WriteLine();
+                        Message.Send("Este amigo possui um empréstimo em aberto ou multa(s) registrada(s) no sistema.", ConsoleColor.Red, true);
+                        Message.Send("Sendo assim não é possível deleta-lo.", ConsoleColor.Red, true);
+                        Console.ReadKey();
+                        return;
+                    }
+                    else
+                    {
+                        _serviceManager.GetFriendService().Delete(friend);
 
-                    Console.WriteLine();
-                    Message.Send("Amigo deletado com sucesso!", ConsoleColor.Green, true);
-                    Console.ReadKey();
+                        Console.WriteLine();
+                        Message.Send("Amigo deletado com sucesso!", ConsoleColor.Green, true);
+                        Console.ReadKey();
+                    }
                 }
             }
         }

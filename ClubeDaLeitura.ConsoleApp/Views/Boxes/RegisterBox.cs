@@ -21,6 +21,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Boxes
             string color = Console.ReadLine();
             if (string.IsNullOrEmpty(color))
             {
+                Console.WriteLine();
                 Message.Send("Este campo não pode ser nulo.", ConsoleColor.Red, true);
                 Console.ReadKey();
                 return;
@@ -31,6 +32,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Boxes
                 string tag = Console.ReadLine();
                 if (string.IsNullOrEmpty(tag))
                 {
+                    Console.WriteLine();
                     Message.Send("Este campo não pode ser nulo.", ConsoleColor.Red, true);
                     Console.ReadKey();
                     return;

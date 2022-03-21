@@ -22,6 +22,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
             string name = Console.ReadLine();
             if (string.IsNullOrEmpty(name))
             {
+                Console.WriteLine();
                 Message.Send($"Este campo não pode ser nulo.", ConsoleColor.Red, true);
                 Console.ReadKey();
                 return;
@@ -32,6 +33,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
                 string responsibleName = Console.ReadLine();
                 if (string.IsNullOrEmpty(responsibleName))
                 {
+                    Console.WriteLine();
                     Message.Send($"Este campo não pode ser nulo.", ConsoleColor.Red, true);
                     Console.ReadKey();
                     return;
@@ -42,6 +44,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
                     string phoneNumber = Console.ReadLine();
                     if (string.IsNullOrEmpty(phoneNumber))
                     {
+                        Console.WriteLine();
                         Message.Send($"Este campo não pode ser nulo.", ConsoleColor.Red, true);
                         Console.ReadKey();
                         return;
@@ -52,6 +55,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
                         string address = Console.ReadLine();
                         if (string.IsNullOrEmpty(address))
                         {
+                            Console.WriteLine();
                             Message.Send($"Este campo não pode ser nulo.", ConsoleColor.Red, true);
                             Console.ReadKey();
                             return;

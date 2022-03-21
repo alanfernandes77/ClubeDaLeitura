@@ -16,32 +16,79 @@ namespace ClubeDaLeitura.ConsoleApp.Services
 
         public void Register(Friend friend)
         {
-            GetFriends().Add(friend);
+            GetList().Add(friend);
         }
 
         public void Delete(Friend friend)
         {
-            GetFriends().Remove(friend);
+            GetList().Remove(friend);
         }
 
         public void List(bool longInfo)
         {
-            foreach (Friend friend in GetFriends())
+            foreach (Friend friend in GetList())
             {
                 if (longInfo)
                 {
-                    Message.Send($"{friend}", ConsoleColor.DarkYellow, true);
+                    {
+                        Message.Send($"{friend}", ConsoleColor.DarkYellow, true);
+                    }
                 }
                 else
                 {
                     Message.Send($"({friend.Id}) {friend.Name}", ConsoleColor.DarkYellow, true);
-
                 }
             }
         }
 
-        public Friend FindById(int id) => GetFriends().Find(x => x.Id == id);
+        public void ListAvailableFriends()
+        {
+            foreach (Friend friend in GetList())
+            {
+                if (!friend.HasLoan && !friend.HasPenalty)
+                {
+                    Message.Send($"({friend.Id}) {friend.Name}", ConsoleColor.DarkYellow, true);
+                }
+            }
+        }
 
-        public List<Friend> GetFriends() => _friendsList;
+        public void ListPenaltyFriends()
+        {
+            foreach (Friend friend in GetList())
+            {
+                if (friend.HasPenalty)
+                {
+                    Message.Send($"({friend.Id}) {friend.Name}", ConsoleColor.DarkYellow, true);
+                }
+            }
+        }
+
+        public bool HasFriendsAvailable()
+        {
+            foreach (Friend friend in GetList())
+            {
+                if (!friend.HasLoan)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasPenalty()
+        {
+            foreach (Friend friend in GetList())
+            {
+                if (!friend.HasPenalty)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Friend FindById(int id) => GetList().Find(x => x.Id == id);
+
+        public List<Friend> GetList() => _friendsList;
     }
 }

@@ -2,13 +2,12 @@
 using ClubeDaLeitura.ConsoleApp.Services;
 using ClubeDaLeitura.ConsoleApp.Utils;
 
-namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
+namespace ClubeDaLeitura.ConsoleApp.Views.Categories
 {
-    internal class ListMagazines
+    internal class ListCategories
     {
         private readonly ServiceManager _serviceManager;
-
-        public ListMagazines(ServiceManager serviceManager)
+        public ListCategories(ServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
         }
@@ -17,7 +16,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
         {
             Console.Clear();
 
-            if (_serviceManager.GetMagazineService().GetList().Count == 0)
+            if (_serviceManager.GetCategoryService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();
@@ -25,7 +24,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
             }
             else
             {
-                _serviceManager.GetMagazineService().List(true);
+                _serviceManager.GetCategoryService().List(true);
 
                 Console.ReadKey();
             }

@@ -19,7 +19,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
         {
             bool run = true;
             Console.Clear();
-            if (_serviceManager.GetMagazineService().GetMagazines().Count == 0)
+            if (_serviceManager.GetMagazineService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();
@@ -73,7 +73,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Magazines
                                 }
                                 else
                                 {
-                                    magazine.Type = newType;
+                                    magazine.Name = newType;
                                     Console.WriteLine();
                                     Message.Send("Campo alterado com sucesso!", ConsoleColor.Green, true);
                                     Console.ReadKey();

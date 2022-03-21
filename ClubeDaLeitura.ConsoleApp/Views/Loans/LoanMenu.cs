@@ -1,6 +1,7 @@
 ﻿using System;
 using ClubeDaLeitura.ConsoleApp.Services;
 using ClubeDaLeitura.ConsoleApp.Utils;
+using ClubeDaLeitura.ConsoleApp.Views.Reservations;
 
 namespace ClubeDaLeitura.ConsoleApp.Views.Loans
 {
@@ -12,6 +13,8 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
         private readonly EditLoan _editLoan;
         private readonly DeleteLoan _deleteLoan;
 
+        private readonly ReservationMenu _reservationMenu;
+
         public LoanMenu(ServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
@@ -19,6 +22,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
             _listLoanMenu = new ListLoanMenu(_serviceManager);
             _editLoan = new EditLoan(_serviceManager);
             _deleteLoan = new DeleteLoan(_serviceManager);
+            _reservationMenu = new ReservationMenu(_serviceManager);
         }
 
         public void Show()
@@ -34,6 +38,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
                 Console.WriteLine("2 -> Listar");
                 Console.WriteLine("3 -> Editar");
                 Console.WriteLine("4 -> Deletar");
+                Console.WriteLine("5 -> Reservas");
                 Console.WriteLine();
                 Console.WriteLine("0 -> Voltar");
                 Console.WriteLine();
@@ -56,6 +61,10 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
 
                     case 4:
                         _deleteLoan.Show();
+                        break;
+
+                    case 5:
+                        _reservationMenu.Show();
                         break;
 
                     case 0:

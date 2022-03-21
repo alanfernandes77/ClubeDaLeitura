@@ -18,7 +18,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Boxes
         {
             bool run = true;
             Console.Clear();
-            if (_serviceManager.GetBoxService().GetBoxes().Count == 0)
+            if (_serviceManager.GetBoxService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();

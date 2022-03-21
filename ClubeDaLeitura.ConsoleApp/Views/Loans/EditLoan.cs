@@ -20,7 +20,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
         {
             bool run = true;
             Console.Clear();
-            if (_serviceManager.GetLoanService().GetLoans().Count == 0)
+            if (_serviceManager.GetLoanService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();
@@ -52,8 +52,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
                         Console.WriteLine("1 -> Amigo");
                         Console.WriteLine("2 -> Revista");
                         Console.WriteLine("3 -> Data do Empréstimo");
-                        Console.WriteLine("4 -> Data de Devolução");
-                        Console.WriteLine("5 -> Status do Empréstimo");
+                        Console.WriteLine("4 -> Status do Empréstimo");
                         Console.WriteLine();
                         Console.WriteLine("0 -> Voltar");
                         Console.WriteLine();
@@ -125,8 +124,10 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
                                 else
                                 {
                                     loan.LoanDate = newLoanDate;
+                                    loan.DevolutionDate = newLoanDate.AddDays(loan.Magazine.Category.MaxLoanDays);
                                     Console.WriteLine();
                                     Message.Send("Campo alterado com sucesso!", ConsoleColor.Green, true);
+                                    Message.Send("Data de devolução automáticamente ajustada para a quantidade máxima limite da categoria da revista.", ConsoleColor.Green, true);
                                     Console.ReadKey();
                                     run = false;
                                 }
@@ -134,31 +135,9 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
 
                             case 4:
                                 Console.Clear();
-                                Console.Write("Insira uma nova data de devolução: ");
-                                DateTime newDevolutionDate = DateTime.ParseExact(Console.ReadLine(), "yyyy", CultureInfo.InvariantCulture);
-                                if (newDevolutionDate < loan.LoanDate)
-                                {
-                                    Console.WriteLine();
-                                    Message.Send("A nova data de devolução não pode ser menor que a data atual do empréstimo.", ConsoleColor.Red, true);
-                                    Console.ReadKey();
-                                    run = false;
-                                }
-                                else
-                                {
-                                    loan.DevolutionDate = newDevolutionDate;
-                                    Console.WriteLine();
-                                    Message.Send("Campo alterado com sucesso!", ConsoleColor.Green, true);
-                                    Console.ReadKey();
-                                    run = false;
-                                }
-                                break;
-
-                            case 5:
-                                Console.Clear();
                                 Message.Send("Selecione abaixo: ", ConsoleColor.DarkYellow, true);
                                 Console.WriteLine();
-                                Console.WriteLine("1 -> Definir como ABERTO");
-                                Console.WriteLine("2 -> Definir como FECHADO");
+                                Console.WriteLine("1 -> Definir como FECHADO");
                                 Console.WriteLine();
                                 Console.WriteLine("0 -> Voltar");
                                 Console.WriteLine();
@@ -167,25 +146,8 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
                                 int option2 = Convert.ToInt32(Console.ReadLine());
                                 switch (option2)
                                 {
-                                    case 1:
-                                        if (loan.LoanStatus == EnumLoanStatus.Aberto)
-                                        {
-                                            Console.WriteLine();
-                                            Message.Send("Este empréstimo já está definido como ABERTO.", ConsoleColor.Red, true);
-                                            Console.ReadKey();
-                                            run = false;
-                                        }
-                                        else
-                                        {
-                                            loan.LoanStatus = EnumLoanStatus.Aberto;
-                                            Console.WriteLine();
-                                            Message.Send("Campo alterado com sucesso!", ConsoleColor.Green, true);
-                                            Console.ReadKey();
-                                            run = false;
-                                        }
-                                        break;
 
-                                    case 2:
+                                    case 1:
                                         if (loan.LoanStatus == EnumLoanStatus.Fechado)
                                         {
                                             Console.WriteLine();
@@ -195,10 +157,31 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
                                         }
                                         else
                                         {
+                                            // Datetime falso criado para testar o sistema de multas.
                                             loan.LoanStatus = EnumLoanStatus.Fechado;
-                                            Console.WriteLine();
-                                            Message.Send("Campo alterado com sucesso!", ConsoleColor.Green, true);
-                                            Console.ReadKey();
+                                            loan.Friend.HasLoan = false;
+                                            DateTime changedDt = new(2022, 03, 31);
+                                            if (changedDt > loan.DevolutionDate)
+                                            {
+                                                TimeSpan difference = changedDt.Subtract(loan.DevolutionDate);
+                                                loan.Friend.Penalty = new Penalty(difference.Days, 10);
+                                                loan.Friend.HasPenalty = true;
+                                                Console.WriteLine();
+                                                Message.Send($"Empréstimo fechado com sucesso.", ConsoleColor.Green, true);
+                                                Console.WriteLine();
+                                                Message.Send($"Multas Geradas:", ConsoleColor.DarkCyan, true);
+                                                Console.WriteLine();
+                                                Message.Send($"Multas aplicadas devido atraso: { loan.Friend.Penalty.Amount} (Dias passados após a data de devolução definida [{loan.DevolutionDate:dd/MM/yyyy}])", ConsoleColor.Red, true);
+                                                Message.Send($"Valor por dia atrasado: R$ { loan.Friend.Penalty.Value}", ConsoleColor.Red, true);
+                                                Message.Send($"Total: R$ { loan.Friend.Penalty.GetTotalValue() } ({loan.Friend.Penalty.Amount} x {loan.Friend.Penalty.Value})", ConsoleColor.Red, true);
+                                                Console.ReadKey();
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine();
+                                                Message.Send("Campo alterado com sucesso!", ConsoleColor.Green, true);
+                                                Console.ReadKey();
+                                            }
                                             run = false;
                                         }
                                         break;

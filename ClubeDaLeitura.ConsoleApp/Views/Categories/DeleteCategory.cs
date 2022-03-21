@@ -1,15 +1,15 @@
 ﻿using System;
-using ClubeDaLeitura.ConsoleApp.Services;
 using ClubeDaLeitura.ConsoleApp.Entities;
+using ClubeDaLeitura.ConsoleApp.Services;
 using ClubeDaLeitura.ConsoleApp.Utils;
 
-namespace ClubeDaLeitura.ConsoleApp.Views.Loans
+namespace ClubeDaLeitura.ConsoleApp.Views.Categories
 {
-    internal class DeleteLoan
+    internal class DeleteCategory
     {
         private readonly ServiceManager _serviceManager;
 
-        public DeleteLoan(ServiceManager serviceManager)
+        public DeleteCategory(ServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
         }
@@ -17,7 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
         public void Show()
         {
             Console.Clear();
-            if (_serviceManager.GetLoanService().GetList().Count == 0)
+            if (_serviceManager.GetCategoryService().GetList().Count == 0)
             {
                 Message.Send("Nenhum registro encontrado.", ConsoleColor.Red, true);
                 Console.ReadKey();
@@ -25,29 +25,26 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Loans
             }
             else
             {
-                _serviceManager.GetLoanService().ListAllLoans();
+                _serviceManager.GetCategoryService().List(false);
 
                 Console.WriteLine();
                 Console.Write("Insira um ID: ");
 
                 int id = Convert.ToInt32(Console.ReadLine());
-                Loan loan = _serviceManager.GetLoanService().FindById(id);
-
-                if (loan == null)
+                Category category = _serviceManager.GetCategoryService().FindById(id);
+                if (category == null)
                 {
                     Console.WriteLine();
-                    Message.Send("Empréstimo não encontrado.", ConsoleColor.Red, true);
+                    Message.Send("Categoria não encontrada.", ConsoleColor.Red, true);
                     Console.ReadKey();
                     return;
                 }
                 else
                 {
-                    loan.Friend.HasLoan = false;
-                    loan.Magazine.WasLoaned = false;
-                    _serviceManager.GetLoanService().Delete(loan);
+                    _serviceManager.GetCategoryService().Delete(category);
 
                     Console.WriteLine();
-                    Message.Send("Empréstimo deletado com sucesso!", ConsoleColor.Green, true);
+                    Message.Send("Categoria deletada com sucesso!", ConsoleColor.Green, true);
                     Console.ReadKey();
                 }
             }

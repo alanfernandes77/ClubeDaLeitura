@@ -11,6 +11,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
         private readonly ListFriends _listFriends;
         private readonly EditFriend _editFriend;
         private readonly DeleteFriend _deleteFriend;
+        private readonly PayFines _payFines;
 
         public FriendMenu(ServiceManager serviceManager)
         {
@@ -19,6 +20,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
             _editFriend = new(_serviceManager);
             _listFriends = new(_serviceManager);
             _deleteFriend = new(_serviceManager);
+            _payFines = new(_serviceManager);
         }
 
         public void Show()
@@ -34,6 +36,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
                 Console.WriteLine("2 -> Listar");
                 Console.WriteLine("3 -> Editar");
                 Console.WriteLine("4 -> Excluir");
+                Console.WriteLine("5 -> Quitar Multas");
                 Console.WriteLine();
                 Console.WriteLine("0 -> Voltar");
                 Console.WriteLine();
@@ -56,6 +59,10 @@ namespace ClubeDaLeitura.ConsoleApp.Views.Friends
 
                     case 4:
                         _deleteFriend.Show();
+                        break;
+
+                    case 5:
+                        _payFines.Show();
                         break;
 
                     case 0:

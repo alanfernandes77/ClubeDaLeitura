@@ -16,17 +16,17 @@ namespace ClubeDaLeitura.ConsoleApp.Services
 
         public void Register(Box box)
         {
-            GetBoxes().Add(box);
+            GetList().Add(box);
         }
 
         public void Delete(Box box)
         {
-            GetBoxes().Remove(box);
+            GetList().Remove(box);
         }
 
         public void List(bool longInfo)
         {
-            foreach (Box box in GetBoxes())
+            foreach (Box box in GetList())
             {
                 if (longInfo)
                 {
@@ -40,8 +40,8 @@ namespace ClubeDaLeitura.ConsoleApp.Services
             }
         }
 
-        public Box FindById(int id) => GetBoxes().Find(x => x.Id == id);
+        public Box FindById(int id) => GetList().Find(x => x.Id == id);
 
-        public List<Box> GetBoxes() => _boxList;
+        public List<Box> GetList() => _boxList;
     }
 }

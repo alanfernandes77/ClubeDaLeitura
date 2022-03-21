@@ -17,25 +17,25 @@ namespace ClubeDaLeitura.ConsoleApp.Services
 
         public void Register(Loan loan)
         {
-            GetLoans().Add(loan);
+            GetList().Add(loan);
         }
 
         public void Delete(Loan loan)
         {
-            GetLoans().Remove(loan);
+            GetList().Remove(loan);
         }
 
         public void ListAllLoans()
         {
-            foreach (Loan loan in GetLoans())
+            foreach (Loan loan in GetList())
             {
                 if (loan.LoanStatus == EnumLoanStatus.Aberto)
                 {
-                    Message.Send($"({loan.Id}) - Amigo: {loan.Friend.Name} | Revista: {loan.Magazine.Type} - STATUS: {loan.LoanStatus}", ConsoleColor.Green, true);
+                    Message.Send($"({loan.Id}) - Amigo: {loan.Friend.Name} | Revista: {loan.Magazine.Name} - STATUS: {loan.LoanStatus}", ConsoleColor.Green, true);
                 }
                 else
                 {
-                    Message.Send($"({loan.Id}) - Amigo: {loan.Friend.Name} | Revista: {loan.Magazine.Type} - STATUS: {loan.LoanStatus}", ConsoleColor.DarkGray, true);
+                    Message.Send($"({loan.Id}) - Amigo: {loan.Friend.Name} | Revista: {loan.Magazine.Name} - STATUS: {loan.LoanStatus}", ConsoleColor.DarkGray, true);
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace ClubeDaLeitura.ConsoleApp.Services
         public void ListMonthLoans()
         {
             int monthLoans = 0;
-            foreach (Loan loan in GetLoans())
+            foreach (Loan loan in GetList())
             {
 
                 if (DateTime.Now.Month == loan.LoanDate.Month)
@@ -68,7 +68,7 @@ namespace ClubeDaLeitura.ConsoleApp.Services
         public void ListOpenLoans()
         {
             int openLoans = 0; 
-            foreach (Loan loan in GetLoans())
+            foreach (Loan loan in GetList())
             {
                 if (loan.LoanStatus == EnumLoanStatus.Aberto)
                 {
@@ -85,7 +85,7 @@ namespace ClubeDaLeitura.ConsoleApp.Services
         public void ListCloseLoans()
         {
             int closeLoans = 0;
-            foreach (Loan loan in GetLoans())
+            foreach (Loan loan in GetList())
             {
                 if (loan.LoanStatus == EnumLoanStatus.Fechado)
                 {
@@ -99,8 +99,8 @@ namespace ClubeDaLeitura.ConsoleApp.Services
             }
         }
 
-        public Loan FindById(int id) => GetLoans().Find(x => x.Id == id);
+        public Loan FindById(int id) => GetList().Find(x => x.Id == id);
 
-        public List<Loan> GetLoans() => _loanList;
+        public List<Loan> GetList() => _loanList;
     }
 }

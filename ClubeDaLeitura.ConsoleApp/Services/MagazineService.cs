@@ -16,17 +16,17 @@ namespace ClubeDaLeitura.ConsoleApp.Services
 
         public void Register(Magazine magazine)
         {
-            GetMagazines().Add(magazine);
+            GetList().Add(magazine);
         }
 
         public void Delete(Magazine magazine)
         {
-            GetMagazines().Remove(magazine);
+            GetList().Remove(magazine);
         }
 
         public void List(bool longInfo)
         {
-            foreach (Magazine magazine in GetMagazines())
+            foreach (Magazine magazine in GetList())
             {
                 if (longInfo)
                 {
@@ -34,14 +34,37 @@ namespace ClubeDaLeitura.ConsoleApp.Services
                 }
                 else
                 {
-                    Message.Send($"({magazine.Id}) Tipo de coleção: {magazine.Type}", ConsoleColor.DarkYellow, true);
+                    Message.Send($"({magazine.Id}) Nome: {magazine.Name} | Categoria: {magazine.Category.Name}", ConsoleColor.DarkYellow, true);
 
                 }
             }
         }
 
-        public Magazine FindById(int id) => GetMagazines().Find(x => x.Id == id);
+        public void ListAvailableMagazines()
+        {
+            foreach (Magazine magazine in GetList())
+            {
+                if (!magazine.WasLoaned)
+                {
+                    Message.Send($"({magazine.Id}) Nome: {magazine.Name}", ConsoleColor.DarkYellow, true);
+                }
+            }
+        }
 
-        public List<Magazine> GetMagazines() => _magazineList;
+        public bool HasMagazinesAvaiable()
+        {
+            foreach (Magazine magazine in GetList())
+            {
+                if (!magazine.WasLoaned)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Magazine FindById(int id) => GetList().Find(x => x.Id == id);
+
+        public List<Magazine> GetList() => _magazineList;
     }
 }

@@ -3,6 +3,7 @@ using ClubeDaLeitura.ConsoleApp.Services;
 using ClubeDaLeitura.ConsoleApp.Utils;
 using ClubeDaLeitura.ConsoleApp.Views.Friends;
 using ClubeDaLeitura.ConsoleApp.Views.Boxes;
+using ClubeDaLeitura.ConsoleApp.Views.Categories;
 using ClubeDaLeitura.ConsoleApp.Views.Magazines;
 using ClubeDaLeitura.ConsoleApp.Views.Loans;
 
@@ -13,6 +14,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views
         private readonly ServiceManager _serviceManager;
         private readonly FriendMenu _friendMenu;
         private readonly BoxMenu _boxMenu;
+        private readonly CategoryMenu _categoryMenu;
         private readonly MagazineMenu _magazineMenu;
         private readonly LoanMenu _loanMenu;
 
@@ -21,6 +23,7 @@ namespace ClubeDaLeitura.ConsoleApp.Views
             _serviceManager = new();
             _friendMenu = new FriendMenu(_serviceManager);
             _boxMenu = new BoxMenu(_serviceManager);
+            _categoryMenu = new CategoryMenu(_serviceManager);
             _magazineMenu = new MagazineMenu(_serviceManager); 
             _loanMenu = new LoanMenu(_serviceManager);
         }
@@ -38,8 +41,9 @@ namespace ClubeDaLeitura.ConsoleApp.Views
                     Console.WriteLine();
                     Console.WriteLine("1 -> Amigo");
                     Console.WriteLine("2 -> Caixa");
-                    Console.WriteLine("3 -> Revista");
-                    Console.WriteLine("4 -> Empréstimo");
+                    Console.WriteLine("3 -> Categoria");
+                    Console.WriteLine("4 -> Revista");
+                    Console.WriteLine("5 -> Empréstimo");
                     Console.WriteLine();
                     Message.Send("Opção: ", ConsoleColor.DarkCyan, false);
 
@@ -55,10 +59,14 @@ namespace ClubeDaLeitura.ConsoleApp.Views
                             break;
 
                         case 3:
-                            _magazineMenu.Show();
+                            _categoryMenu.Show();
                             break;
 
                         case 4:
+                            _magazineMenu.Show();
+                            break;
+
+                        case 5:
                             _loanMenu.Show();
                             break;
 

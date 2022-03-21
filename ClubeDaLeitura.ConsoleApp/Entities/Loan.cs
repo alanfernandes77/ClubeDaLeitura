@@ -14,13 +14,13 @@ namespace ClubeDaLeitura.ConsoleApp.Entities
 
         public EnumLoanStatus LoanStatus { get; set; }
 
-        public Loan(Friend friend, Magazine magazine, DateTime loanDate, DateTime devolutionDate)
+        public Loan(Friend friend, Magazine magazine, DateTime loanDate)
         {
             Id = new Random().Next(1, 10000);
             Friend = friend;
             Magazine = magazine;
             LoanDate = loanDate;
-            DevolutionDate = devolutionDate;
+            DevolutionDate = loanDate.AddDays(magazine.Category.MaxLoanDays); 
             LoanStatus = EnumLoanStatus.Aberto;
         }
 
@@ -29,9 +29,13 @@ namespace ClubeDaLeitura.ConsoleApp.Entities
             StringBuilder sb = new();
             sb.AppendLine($"ID: {Id}");
             sb.AppendLine($"Amigo emprestado: {Friend.Name}");
-            sb.AppendLine($"Revista emprestada: {Magazine.Type}");
+            sb.AppendLine($"Revista emprestada: {Magazine.Name}");
             sb.AppendLine($"Data em que foi emprestada: {LoanDate:dd/MM/yyyy}");
-            sb.AppendLine($"Data prevista de devolução: {DevolutionDate:dd/MM/yyyy}");
+            sb.AppendLine($"Data prevista de devolução: {LoanDate.AddDays(Magazine.Category.MaxLoanDays):dd/MM/yyyy}");
+            if (LoanStatus == EnumLoanStatus.Fechado)
+            {
+                sb.AppendLine($"Data de devolução: {DevolutionDate}");
+            }
             sb.AppendLine($"Status: {LoanStatus}");
             return sb.ToString();
         }
